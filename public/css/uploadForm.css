@@ -1,0 +1,174 @@
+body{
+    background-color: rgb(43, 42, 42);
+}
+#formContainer{
+    width: 50%;
+    margin: 3% auto;
+    padding: 30px;
+    border-radius: 20px;
+    background-color: rgb(24,24,24);
+    color: white;
+}
+
+#uploadbanner{
+    width: 100%;
+}
+input[type=text]{
+    padding:6px;
+    border-radius: 10px;
+    background-color: rgb(57, 57, 57);
+    padding: 11px;
+    color: white;
+    border:none;
+}
+.tagList, .cftList{
+    border: 1px solid black;
+    overflow: auto;
+    height: 200px;
+}
+.tagList > div, .cftList > div{
+    border-radius: 99px;
+    padding: 5px;
+    cursor: pointer;
+}
+.tagList > div:hover, .cftList > div:hover{
+    background-color: #00aab5;
+    color: white;
+}
+.etc p, .cft p{
+    background-color: #00aab5;
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+}
+.tagSettings{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: space-around;
+    align-items: flex-start;
+}
+#dropZone{
+    margin: auto;
+    width: 70%;
+    height: 250px;
+    border: 3px dashed #00aab5;
+    text-align: center;
+}
+#dropZone p{
+    margin-top: 10%;
+}
+
+.fileContainer{
+    margin-top: 1.9%;
+    width: 20%;
+    border-radius: 10px;
+    background-color: rgb(42,42,42);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.ftc{
+    display: flex;
+    margin-top:3%;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 20px;
+}
+.searchTags{
+
+    background: none;
+    outline: none;
+    color: white;
+    padding: 10px;
+    border-radius: 99px;
+}
+.removeTag{
+    cursor: pointer;
+    border-radius: 50%;
+    text-align: center;
+    padding: 5px;
+}
+#loadedFiles, .ftc{
+    width: 100%;
+}
+.tagFilter{
+    width: 25%;
+}
+.searchTagContainer{
+    display: flex;
+}
+.ftre{
+    display: inline-flex;
+    border-radius: 99px;
+    background-color: #00aab5;
+    padding: 10px;
+    flex-direction: row;
+    align-items: center;
+    max-height: 25px;
+}
+.ftc:last-child{
+    margin-bottom: 3%;
+}
+.selectedTags{
+    width: 35%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: flex-start;
+    overflow: auto;
+    height: 95px;
+}
+input[type=button], input[type=submit]{
+    font-size: 14px;
+    cursor: pointer;
+    margin-top: 3%;
+    padding: 11px;
+    color: white;
+    border: 3px solid #00aab5;
+    background-color: transparent;
+    border-radius: 10px;
+}
+input[type=button]:hover, input[type=submit]:hover{
+    background-color: #00aab5;
+}
+.at{
+    display: grid;
+}
+
+#file{
+    display: none;
+}
+
+.fileContainer>span{
+    word-break: break-all;
+    padding: 10px;
+}
+input[type=button].removeItem{
+    font-size: 14px;
+    cursor: pointer;
+    margin-top: 3%;
+    color: white;
+    border:none;
+    background-color: transparent;
+    margin: 0;
+}
+input[type=button].removeItem:hover{
+    color: #00aab5;
+}
+#submit{
+    display: none;
+    margin-left: 88.5%;
+}
+@media screen and (min-width: 1440px){
+    #uploadBanner{width: 70%;}
+}
+@media screen and(min-width:1980px){
+    #uploadBanner{width: 50%;}
+}
+
+.apiField {
+    width: 45%;
+}

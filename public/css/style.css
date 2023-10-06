@@ -1,0 +1,130 @@
+
+*{
+    padding: 0;
+    margin: 0;   
+    font-family: "Source Sans Pro", sans-serif;
+    font-weight: 700;
+}
+body{
+    background-color: rgb(43, 42, 42);
+}
+#navBar{
+    background-color: rgb(24, 24, 24);
+    padding: 30px 25px;
+    color: white;
+    display: flex;
+    align-items: center;
+}
+#navBar>div:first-child{
+    margin-right:2%;
+}
+#header {
+    text-align: center;
+}
+
+#pptContainer{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: space-around;
+    justify-content: center;
+    margin-top: 25px;
+}
+.iframeContainer{
+    width: 40%;
+    margin: 15px;
+}
+
+.filterBtn {
+    margin: 5px;
+    border: none;
+    padding: 10px;
+}
+
+.messages {
+    margin: 5px;
+    font-weight: bold;
+}
+
+
+#editBtn {
+    margin-left: 5px;
+    cursor: pointer;
+}
+.logoContainer{
+    width:10%;
+}
+.logo{
+    width: 100%;
+}
+.adminBtn{
+    background-color: transparent;
+    text-decoration: none;
+    padding: 10px;
+    color: white;
+    font-weight: 700;
+}
+.adminBtn:hover{
+    color: #00AAB5;
+}
+.tagBtn{
+    background-color: transparent;
+    color: white;
+    padding: 15px;
+    border: none;
+}
+.tagBtn:not(:first-child){
+    margin-left: 1%;
+}
+.tagBtn:hover{
+    cursor: pointer;
+    background-color: #00AAB5;
+
+}
+.active{
+    background-color: #028089;
+}
+#menuContainer{
+    display: flex;
+}
+
+.pptFB{
+    text-decoration: none;
+    padding: 13px;
+    border-radius: 99px;
+    font-weight: 700;
+    color: white;
+    background-color: #00AAB5;
+    margin-top: 2%;
+    display: inline-block;
+}
+.pptFB:hover{
+    color: white;
+    background-color: #00636a;
+}
+#uploadbanner{
+    width: 30%;
+    margin: auto;
+}
+#tagList{
+    background-color: rgb(43, 42, 42);
+    padding: 0 15px;
+    border-bottom: 2px solid #00AAB5;
+}
+.slideContainer{
+    opacity: 0.9;
+}
+
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.trashImg {
+    display: flex;
+    padding: 10px 0px 0px 5px;
+    max-width: 13%;
+}
