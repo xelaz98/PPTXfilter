@@ -1,0 +1,187 @@
+* {
+    padding: 0;
+    margin: 0;
+    font-family: "Source Sans Pro", sans-serif;
+    font-weight: 700;
+    box-sizing: border-box;
+}
+::-webkit-scrollbar{
+    width: 0.5em;
+    height: 0.5em;
+}
+::-webkit-scrollbar-thumb{
+    background-color: rgba(255,255,255,.5);
+    border-radius: 3px;
+}
+::-webkit-scrollbar:hover{
+    background-color: rgba(255,255,255,.1);
+}
+body {
+    background-color: rgb(43, 42, 42);
+}
+#loadedFiles{
+    display: grid;
+    gap: 3em;
+}
+#navBar {
+    background-color: rgb(24, 24, 24);
+    padding: 30px 25px;
+    color: white;
+    display: flex;
+    align-items: center;
+}
+#group_Charts{
+    height: 300px;
+    overflow-y: scroll;
+}
+#mainGrid {
+    display: grid;
+    grid-template-columns: 400px auto;
+    margin: 1em;
+}
+#taglist>div{
+    display: grid;
+    gap: .75em;
+}
+#tagList>div>h1 {
+    font-weight: bold;
+    font-size: 21px;
+    color: #00AAB5;
+}
+
+#navBar>div:first-child {
+    margin-right: 2%;
+}
+
+.hidden {
+    display: none;
+}
+#searchBar input[type=text] {
+    padding: 8px 16px;
+    max-width: 100%;
+    min-width: 120px;
+}
+#search:focus::placeholder{
+    color: transparent;
+}
+#pptContainer {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1em;
+}
+
+@media (max-width:1000px){
+    #pptContainer{
+        grid-template-columns: 1fr;
+    }
+}
+
+.filterBtn {
+    margin: 5px;
+    border: none;
+    padding: 10px;
+}
+.messages {
+    margin: 5px;
+    font-weight: bold;
+}
+
+#editBtn {
+    margin-left: 5px;
+    cursor: pointer;
+}
+.logoContainer {
+    width: 10%;
+}
+.logo {
+    width: 100%;
+}
+.adminBtn {
+    background-color: transparent;
+    text-decoration: none;
+    padding: 10px;
+    color: white;
+    font-weight: 700;
+}
+.adminBtn:hover {
+    color: #00AAB5;
+}
+.tagBtn {
+    background-color: transparent;
+    color: white;
+    padding: 15px;
+    border: none;
+    max-width: 100%;
+    font-size: 14px;
+}
+.tagBtn:not(:first-child) {
+    margin-left: 1%;
+}
+.tagBtn:hover {
+    cursor: pointer;
+    background-color: #00AAB5;
+}
+.active {
+    background-color: #028089;
+}
+
+#menuContainer {
+    display: flex;
+}
+.pptFB {
+    text-decoration: none;
+    padding: 13px;
+    border-radius: 99px;
+    font-weight: 700;
+    color: white;
+    background-color: #00AAB5;
+    margin-top: 2%;
+    display: inline-block;
+}
+
+.pptFB:hover {
+    color: white;
+    background-color: #00636a;
+}
+
+#uploadbanner {
+    width: 30%;
+    margin: auto;
+}
+
+#tagList {
+    background-color: rgb(43, 42, 42);
+    padding: 0 15px;
+    padding-top: 25px;
+}
+
+.slideContainer {
+    opacity: 0.9;
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(3, 120px);
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.trashImg {
+    display: block;
+    height: auto;
+    max-width: 100%;
+}
+img{
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+.wrapper {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+}
+.at{
+    display: grid;
+}

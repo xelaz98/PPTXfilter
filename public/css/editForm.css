@@ -1,0 +1,138 @@
+@import url(./base.css);
+
+#formContainer {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1em;
+    min-width: 240px;
+    width: 55em;
+    padding: 30px;
+    border-radius: 10px;
+    background-color: rgb(24, 24, 24);
+    color: white;
+    margin: 1em auto;
+}
+
+.iframeContainer {
+    grid-column: span 2;
+    display: grid;
+    gap: .5em;
+}
+
+.selected-tags-container {
+    grid-column: span 2;
+    max-width: 100%;
+}
+
+input[type=text] {
+    width: 100%;
+    max-width: 100%;
+}
+
+.selectedTags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .4em;
+    max-height: 260px;
+    overflow-y: scroll;
+}
+
+.search-tag-container {
+    grid-column: 3;
+}
+
+.pptFB {
+    max-width: 150px;
+}
+
+.management-buttons-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+}
+
+input[type=text] {
+    border-radius: 10px;
+    background-color: rgb(57, 57, 57);
+    padding: 11px;
+    color: white;
+    border: none;
+}
+
+.ftre {
+    display: inline-flex;
+    border-radius: 10px;
+    background-color: #00aab5;
+    padding: 10px;
+    flex-direction: row;
+    align-items: center;
+    gap: 1em;
+    min-height: 50px;
+    height: 30%;
+}
+
+.removeTag {
+    cursor: pointer;
+}
+
+#doneBtn {
+    max-width: 240px;
+    justify-self: center;
+}
+
+.messages {
+    width: 100%;
+    max-width: 320px;
+    padding: 15px;
+    text-align: center;
+    justify-self: center;
+    grid-column: span 4;
+}
+
+.messages.error {
+    background: red;
+}
+
+.messages.processing {
+    background: #607d8b;
+}
+
+.messages.success {
+    background: green;
+}
+
+#file {
+    display: none;
+}
+
+.new-file-container>p {
+    color: var(--main-color);
+}
+
+.new-file-container.hide {
+    display: none;
+    max-width: 240px;
+}
+.new-file-container.show{
+    display: block;
+}
+.file-container-wrapper {
+    margin: 12px 0;
+    border-radius: 10px;
+    background-color: rgb(42, 42, 42);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    max-width: 240px;
+    width: fit-content;
+    padding: 8px 16px;
+    gap: 1.5em;
+}
+.file-name-text{
+    text-overflow: ellipsis;
+}
+.remove-btn{
+    cursor: pointer;
+}

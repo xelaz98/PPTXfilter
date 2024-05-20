@@ -1,0 +1,125 @@
+@import url(./base.css);
+*{
+    box-sizing: border-box;
+}
+#mainGrid{
+    display: grid;
+    grid-template-columns: 400px auto;
+    padding: 1em;
+    gap: .5em;
+}
+#tagList{
+    background-color: var(--secondary-color);
+    padding: 25px 15px 0 0;
+    display: grid;
+    gap: 1em;
+}
+#tagList > div > h2{
+    font-weight: bold;
+    font-size: 21px;
+    color: var(--main-color);
+}
+
+#group_Charts{
+    height: 300px;
+    overflow-y: scroll;
+}
+#header #pptContainer{
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1em;
+}
+#group_Clients{
+    height: 120px;
+    overflow-y: scroll;
+}
+#pptContainer .iframeContainer .slideContainer{
+    opacity: .9;
+}
+.iframeContainer{
+    display: grid;
+    gap: 1em;
+}
+.buttons{
+    display: grid;
+    grid-template-columns: repeat(2, 120px);
+    justify-self: center;
+    align-items: center;
+    text-align: center;
+    gap: 2em;
+    justify-content: center;
+}
+.hidden{
+    display: none;
+}
+#search{
+    padding: 8px 16px;
+    border: none;
+    border-radius: 10px;
+}
+@media (max-width:1000px){
+    #header #pptContainer{
+        grid-template-columns: 1fr;
+    }
+}
+.checkbox-container{
+    max-width: 100%;
+}
+.checkbox-container>div{
+    margin-left: 0.7em;
+}
+aside{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+.clear-filters{
+    padding: 8px 16px;
+    text-align: center;
+    border: 2px solid var(--main-color);
+    cursor: pointer;
+    max-width: 180px;
+    width: 100%;
+    border-radius: 10px;
+}
+.clear-filters:hover{
+    background-color: var(--main-color);
+}
+
+.file-for-download{
+    border: 3px solid var(--main-color);
+}
+
+/* ----------------- */
+
+/* .pagination_wrapper {
+    width: 420px;
+    height: 30px;
+    display: block;
+    border: 1px solid gray;
+}
+
+.pagination {
+    margin-left: 15%;
+}
+
+.pagination .button {
+    background: transparent;
+    color: black;
+    border: transparent;
+    font-weight: 700;
+    margin-left: 2px;
+    border-radius: 3px !important;
+    padding: 1px 10px;
+    line-height: 1.8em;
+    border: 1px solid #535353;
+    display: inline;
+    cursor: pointer;
+}
+
+.hideme {
+    display: none !important;
+    width: 0px;
+    height: 0px;
+} */
