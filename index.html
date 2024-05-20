@@ -1,0 +1,219 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AWS S3 File Upload</title>
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.1457.0.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div id="header">
+        <input type="text" id="searchBar" oninput="(listObjs)">
+        <input type="file" id="file-chooser" />
+        <label for="tags">PPTx tags (separate by comma if multiple)</label>
+        <input type="text" id="tagId" name="tags">
+        <button id="upload-button">Upload to S3</button>
+        <br/><br/>
+        <button id="showObjects" onclick="listObjs()">List objects</button>
+        <br/><br/>
+        <div id="tags"></div>
+        <div id="pptContainer">
+        </div>
+    </div>
+
+<script type="text/javascript">
+    const ENDPOINT_URL = "https://s3.eu-west-1.amazonaws.com"
+    const ACCESS_KEY_ID = "AKIA5TTO2IB6N7DO3X53"
+    const ACCESS_KEY_SECRET = "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"
+    const BUCKET_NAME = "pptfiletransfer"
+    let cont = document.getElementById('pptContainer');
+    let tags = [];
+    var bucket = new AWS.S3({
+        accessKeyId: ACCESS_KEY_ID,
+        secretAccessKey: ACCESS_KEY_SECRET,
+        endpoint: new AWS.Endpoint(ENDPOINT_URL),
+        params: {
+            Bucket: BUCKET_NAME
+        }
+    })
+    
+    var fileChooser = document.getElementById('file-chooser')
+    var button = document.getElementById('upload-button')
+    var results = document.getElementById('results')
+    var pptxTags = document.getElementById('tagId')
+
+    document.getElementById('upload-button').addEventListener('click', function() {
+        var file = fileChooser.files[0]
+        const isEmpty = str => !str.trim().length;
+
+        if (!file) {
+            console.log('Nothing to upload.')
+            return
+        }
+
+        if (isEmpty(pptxTags.value)) {
+            console.log('please put tags for this file.')
+            return
+        }
+
+        var params = {
+            Key: 'upload/' + file.name,
+            ContentType: file.type,
+            Body: file,
+            ACL: 'public-read'
+        }
+
+        bucket.putObject(params, function(err, data) {
+            if (err) {
+                console.log('ERROR: ' + err);
+                return
+            }
+        })
+
+        PutTags('upload/' + file.name);
+        listObjs()
+
+    }, false)
+
+    function PutTags(objKey) {
+        bucket.listObjects({Prefix: 'upload/'}, function(err, data) {
+            if (err) {
+                results.innerHTML = 'ERROR: ' + err;
+                return
+            }
+            tags = [];
+            document.getElementById('tags').innerHTML = "";
+            data.Contents.forEach(function(obj) {
+                if(obj.Key.includes('.pptx') && obj.Key == objKey){
+                    bucket.getObjectTagging({Bucket: BUCKET_NAME, Key: obj.Key, VersionId: obj.VersionId}, function(err, data){
+                        if(err){
+                            console.log(err);
+                        }
+                        else {
+                            var allTags = pptxTags.value.split(',')
+                            for (var i = 0; i < allTags.length; i++) {
+                                var newTag = {Key: (Object.entries(data.TagSet).length).toString(), Value: allTags[i]}
+                                data.TagSet.push(newTag)
+                            }
+                            document.getElementById('tag_' + obj.Key).value = allObjTags.join(',')
+
+                            var paramTags = {
+                                Bucket: BUCKET_NAME,
+                                Key: obj.Key,
+                                Tagging: {
+                                    TagSet: data.TagSet
+                                }
+                            };
+                            bucket.putObjectTagging(paramTags, function(err, data){
+                                if(err){
+                                    console.log(err)
+                                }
+                            })
+                        }
+                    })  
+            } else {
+                return;
+            }
+        });
+    });
+    }
+
+    function listObjs() {
+        bucket.listObjects({Prefix: 'upload/'}, function(err, data) {
+            if (err) {
+                results.innerHTML = 'ERROR: ' + err;
+                return
+            }
+            var objKeys = "";
+            cont.innerHTML = "";
+            tags = [];
+            document.getElementById('tags').innerHTML = "";
+            data.Contents.forEach(function(obj) {
+                if(obj.Key.includes('.pptx')){
+                    cont.innerHTML +=`<div id="ppt_${obj.Key}" class='iframeContainer'><iframe src='https://view.officeapps.live.com/op/embed.aspx?src=https://${BUCKET_NAME}.s3.eu-west-1.amazonaws.com/${obj.Key}' width='100%' height='350px' frameborder='0'></iframe><div class='editTag'><input type='button' class='editButton' value='EditTags'><input type="text" class="Tags" id="tag_${obj.Key}" name="currentTags" disabled><br><br></div></div>`;
+                    bucket.getObjectTagging({Bucket: BUCKET_NAME, Key: obj.Key, VersionId: obj.VersionId}, function(err, data){
+                        if(err){
+                            console.log(err);
+                        }
+                        else{
+                            var allObjTags = []
+                            for (i = 0; i < Object.values(data.TagSet).length; i++) {
+                                allObjTags.push(data.TagSet[i].Value)
+                                if (!tags.includes(data.TagSet[i].Value)) {
+                                    tags.push(data.TagSet[i].Value)
+                                    document.getElementById('tags').innerHTML += `<input class="filterBtn" type="button" value="${data.TagSet[i].Value}" />`  
+                                }
+                                const filterBtns = document.querySelectorAll('.filterBtn');
+
+                                filterBtns.forEach(btn => {
+                                    btn.addEventListener('click', function handleClick(event) {
+                                        if (!event.target.classList.contains('active')) {
+                                            event.target.classList.add('active');
+                                            event.target.style.backgroundColor = "red";
+                                            UpdatePPTx();
+                                        } else {
+                                            event.target.classList.remove('active');
+                                            event.target.style.backgroundColor = "#F0F0F0";
+                                            UpdatePPTx();
+                                        }
+                                        });
+                                });
+                            }
+
+                            document.getElementById('tag_' + obj.Key).value = allObjTags.join(',')
+                            var paramTags = {
+                                Bucket: BUCKET_NAME,
+                                Key: obj.Key,
+                                Tagging: {
+                                    TagSet: data.TagSet
+                                }
+                            };
+                            bucket.putObjectTagging(paramTags, function(err, data){
+                                if(err){
+                                    console.log(err)
+                                }
+                            })
+                        }
+                    })                 
+                   
+                }
+            });
+        })
+    }
+
+function UpdatePPTx() {
+    const tags = document.querySelectorAll('.Tags');
+    const filters = [];
+
+    $('.filterBtn').each(function() {
+        if ($(this).hasClass('active')) {
+            filters.push($(this).attr("value"));
+        }
+    })
+
+    tags.forEach(tag => {
+        var show = 1;
+        filters.forEach(filter => {
+            tagNames = tag.value.split(',')
+            if (!tagNames.includes(filter)) {
+                show = 0;
+                document.getElementById('ppt_' + tag.id.split('_')[1]).style.display = 'none';
+                return;
+            } else if (show == 1) {
+                document.getElementById('ppt_' + tag.id.split('_')[1]).style.display = 'block';
+                return;
+            }
+        });
+    })
+
+    if (filters.length == 0) {
+        tags.forEach(tag => {
+            document.getElementById('ppt_' + tag.id.split('_')[1]).style.display = 'block';
+        });
+    }
+}
+
+</script>
+</body>
+</html>
